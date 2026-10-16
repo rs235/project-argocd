@@ -10,7 +10,7 @@ This repository is a part of a bigger infrastructure as code project that uses:
 - **Argo CD** which is initially installed by Kubespray to deploy and manage cluster workloads.
 - **GitHub Actions** for CI/CD.
 
-[IaC repository link](https://github.com/rs235/project-infrastructure) 
+[IaC repository link](https://github.com/rs235/project-infrastructure)
 
 ## Repository structure
 
