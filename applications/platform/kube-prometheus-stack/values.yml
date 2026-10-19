@@ -9,22 +9,22 @@ prometheus:
     retention: 15d
 
     additionalScrapeConfigs:
-    - job_name: pve
-      metrics_path: /pve
-      params:
-        module: [default]
-        cluster: ['1']
-        node: ['1']
-      static_configs:
-        - targets:
-            - 10.10.10.10
-          labels:
-            instance: pve
-      relabel_configs:
-        - source_labels: [__address__]
-          target_label: __param_target
-        - target_label: __address__
-          replacement: 10.10.10.54:9221
+      - job_name: pve
+        metrics_path: /pve
+        params:
+          module: [default]
+          cluster: ['1']
+          node: ['1']
+        static_configs:
+          - targets:
+              - 10.10.10.10
+            labels:
+              instance: pve
+        relabel_configs:
+          - source_labels: [__address__]
+            target_label: __param_target
+          - target_label: __address__
+            replacement: 10.10.10.54:9221
 
   service:
     type: LoadBalancer
