@@ -13,5 +13,5 @@ replicas:
     count: 3
 
 images:
-  - name: nginx
+  - name: nginxinc/nginx-unprivileged
     newTag: "1.31"

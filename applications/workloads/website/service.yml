@@ -4,6 +4,7 @@ kind: Service
 
 metadata:
   name: website
+  namespace: website
 
 spec:
   selector:
@@ -12,9 +13,6 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: http
-    - name: https
-      port: 443
-      targetPort: https
+      targetPort: 8080
 
   type: LoadBalancer
