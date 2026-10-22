@@ -36,7 +36,7 @@ spec:
 
       containers:
         - name: nginx
-          image: rs235/website:latest
+          image: rs235/website:1792481759
 
           resources:
             requests:

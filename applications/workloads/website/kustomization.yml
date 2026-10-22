@@ -12,7 +12,3 @@ namespace: website
 replicas:
   - name: website
     count: 1
-
-images:
-  - name: nginx
-    newTag: "1.31"
