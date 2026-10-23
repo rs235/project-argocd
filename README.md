@@ -11,19 +11,51 @@ This repository is part of a broader infrastructure as code project built with T
 
 The repository uses the Argo CD **App of Apps** pattern. A root Application watches a cluster configuration directory containing YAML files that define the child Applications for that environment. 
 
-```text
-bootstrap/root-home.yml                 bootstrap/root-aws.yml
-          │                                        │
-          ▼                                        ▼
-  root Application                         root Application
-  path: clusters/home                      path: clusters/aws
-          │                                        │
-          ├── argocd-projects                       ├── argocd-projects
-          │     └── projects/                       │     └── projects/
-          ├── website                              ├── website
-          │     └── applications/workloads/website  │     └── applications/workloads/website
-          └── kube-prometheus-stack                └── kube-prometheus-stack
-                └── Helm chart + Git values              └── Helm chart + Git values
+``` mermaid
+flowchart TB
+    subgraph HOME["Home Environment"]
+        direction TB
+        H0["bootstrap/root-home.yml"]
+        H1["Root Application<br/>path: clusters/home"]
+
+        H0 --> H1
+
+        H1 --> H2["argocd-projects"]
+        H2 --> H3["projects/"]
+
+        H1 --> H4["website"]
+        H4 --> H5["applications/workloads/website"]
+
+        H1 --> H6["kube-prometheus-stack"]
+        H6 --> H7["Helm chart + Git values"]
+    end
+
+    subgraph AWS["AWS Environment"]
+        direction TB
+        A0["bootstrap/root-aws.yml"]
+        A1["Root Application<br/>path: clusters/aws"]
+
+        A0 --> A1
+
+        A1 --> A2["argocd-projects"]
+        A2 --> A3["projects/"]
+
+        A1 --> A4["website"]
+        A4 --> A5["applications/workloads/website"]
+
+        A1 --> A6["kube-prometheus-stack"]
+        A6 --> A7["Helm chart + Git values"]
+    end
+
+    classDef bootstrap fill:#e1f5fe,stroke:#0288d1,color:#01579b
+    classDef root fill:#fff3e0,stroke:#ef6c00,color:#e65100
+    classDef app fill:#e8f5e9,stroke:#388e3c,color:#1b5e20
+    classDef config fill:#f3e5f5,stroke:#8e24aa,color:#4a148c
+
+    class H0,A0 bootstrap
+    class H1,A1 root
+    class H2,H4,H6,A2,A4,A6 app
+    class H3,H5,H7,A3,A5,A7 config
 ```
 
 The cluster directories contain Argo CD `Application` manifests and not Kustomize overlays.
