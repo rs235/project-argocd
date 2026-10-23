@@ -75,7 +75,6 @@ jobs:
 
       - name: Render manifests
         run: |
-          ls -lah
           kubectl kustomize applications/workloads/website > rendered/kustomize/website.yml
 
       - name: Upload rendered manifests
