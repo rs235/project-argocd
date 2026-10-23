@@ -48,7 +48,6 @@ flowchart TB
     end
 
     classDef bootstrap fill:#e1f5fe,stroke:#0288d1,color:#01579b
-    classDef root fill:#fff3e0,stroke:#ef6c00,color:#e65100
     classDef app fill:#e8f5e9,stroke:#388e3c,color:#1b5e20
     classDef config fill:#f3e5f5,stroke:#8e24aa,color:#4a148c
 
