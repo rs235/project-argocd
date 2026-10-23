@@ -46,11 +46,6 @@ flowchart TB
         A1 --> A6["kube-prometheus-stack"]
         A6 --> A7["Helm chart + Git values"]
     end
-
-    class H0,A0 bootstrap
-    class H1,A1 root
-    class H2,H4,H6,A2,A4,A6 app
-    class H3,H5,H7,A3,A5,A7 config
 ```
 
 The cluster directories contain Argo CD `Application` manifests and not Kustomize overlays.
@@ -224,4 +219,3 @@ For a third-party Helm chart, add an Argo CD `Application` that pins the chart v
 - Tighter "platform" AppProject permissions.
 - Add Overlays for cluster specific configuration.
 - Introduce ApplicationSets.
-
