@@ -47,10 +47,6 @@ flowchart TB
         A6 --> A7["Helm chart + Git values"]
     end
 
-    classDef bootstrap fill:#e1f5fe,stroke:#0288d1,color:#01579b
-    classDef app fill:#e8f5e9,stroke:#388e3c,color:#1b5e20
-    classDef config fill:#f3e5f5,stroke:#8e24aa,color:#4a148c
-
     class H0,A0 bootstrap
     class H1,A1 root
     class H2,H4,H6,A2,A4,A6 app
