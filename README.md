@@ -9,7 +9,7 @@ This repository is part of a broader infrastructure as code project built with T
 
 ## Architecture
 
-The repository uses the Argo CD **App of Apps** pattern. A root Application watches a cluster directory containing YAML files that define the child Applications for that environment.
+The repository uses the Argo CD **App of Apps** pattern. A root Application watches a cluster configuration directory containing YAML files that define the child Applications for that environment. 
 
 ```text
 bootstrap/root-home.yml                 bootstrap/root-aws.yml
@@ -81,19 +81,19 @@ The cluster directories contain Argo CD `Application` manifests and not Kustomiz
 
 ### Website
 
-`applications/workloads/website/` contains a Deployment and a `LoadBalancer` Service for an unprivileged NGINX container. Kustomize renders these manifests and sets the desired replica count. The Deployment also specifies non-root execution, the runtime-default seccomp profile, no privilege escalation, a read-only root filesystem, dropped Linux capabilities, and CPU/memory requests and limits.
+`applications/workloads/website/` contains manifests for an unprivileged nginx container that are later rendered with Kustomize to adjust desired configuration like replica count. Deployment manifest has been secured with non-root execution, runtime-default seccomp profile, no privilege escalation, read-only root filesystem, dropped Linux capabilities, and CPU/memory requests and limits. NetworkPolicy restricts ingress to traffic coming from Caddy VM over port 80 and blocks all new outband connections.
 
-The workload manifest is referenced by each cluster's `website` Application. Cluster-specific differences should be added only when the environments genuinely require them.
+The workload manifest is referenced by each cluster's `website` Application. Cluster-specific differences are added only when genuinely required.
 
 ### Monitoring
 
-Each cluster's `kube-prometheus-stack` Application deploys the `kube-prometheus-stack` Helm chart from the Prometheus Community chart repository, pinned to chart version `87.16.1`. Helm values live in `applications/platform/kube-prometheus-stack/values.yml` and are loaded from this Git repository using Argo CD's multi-source Application support.
+Each cluster's `kube-prometheus-stack` Application deploys the `kube-prometheus-stack` Helm chart from the Prometheus Community chart repository. Chart is pinned to specific version for security and reproducibility. Helm values live in `applications/platform/kube-prometheus-stack/values-<cluster>.yml` and are loaded from this Git repository.
 
-The values enable Grafana, Prometheus, and Alertmanager, configure 15-day Prometheus retention, and add a scrape job for Proxmox metrics. The chart itself is sourced from its upstream Helm repository rather than copied into this repository.
+The values enable Grafana, Prometheus, and Alertmanager, configure 15-day Prometheus retention, and add a scrape job for Proxmox metrics for Home environment. The chart itself is sourced from its upstream Helm repository rather than copied into this repository.
 
 ### Argo CD
 
-Argo CD is installed as part of the cluster bootstrap process. `bootstrap/argocd.yml` is a separate Application that tracks the upstream Argo CD `v3.5.2` cluster-install manifests. It is not a child of either cluster root and must be applied separately if Argo CD self-management is desired.
+Argo CD is initially installed by Ansible with Kubespray as part of the cluster deployment process. Root Application located at `bootstrap/argocd.yml`needs to be manually deployed later for further Argo CD instance upgrades and management.
 
 ## Bootstrap
 
