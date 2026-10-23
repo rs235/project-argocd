@@ -1,0 +1,16 @@
+---
+grafana:
+  enabled: true
+  service:
+    type: LoadBalancer
+
+prometheus:
+  prometheusSpec:
+    retention: 15d
+  service:
+    type: LoadBalancer
+
+alertmanager:
+  enabled: true
+  service:
+    type: LoadBalancer
