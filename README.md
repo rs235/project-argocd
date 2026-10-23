@@ -187,8 +187,14 @@ For a third-party Helm chart, add an Argo CD `Application` that pins the chart v
 - **Argo CD owns deployment:** GitHub Actions validates changes, while Argo CD continuously reconciles the merged desired state.
 - **Pinned external inputs:** chart versions and CI actions are pinned in configuration to make changes reviewable and reduce ambiguity.
 
+## Related repositories
+[Infrastructure as Code repository](https://github.com/rs235/project-infrastructure)
+
+[Website repository](https://github.com/rs235/project-website)
+
 ## Future improvements
 
 - Tighter "platform" AppProject permissions.
 - Add Overlays for cluster specific configuration.
 - Introduce ApplicationSets.
+
