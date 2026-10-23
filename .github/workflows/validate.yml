@@ -144,7 +144,7 @@ jobs:
             -strict
             -summary
             -ignore-filename-pattern kustomization\.ya?ml
-            -ignore-filename-pattern values-.*\.ya?ml
+            -ignore-filename-pattern values.*\.ya?ml
             -schema-location default
             -schema-location "schemas/{{ .ResourceKind }}.json"
             applications/
