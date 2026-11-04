@@ -19,4 +19,4 @@ parameters:
   staleReplicaTimeout: "2880"
   fsType: "ext4"
   dataLocality: "disabled"
-  # nodeSelector: "storage"
+  nodeSelector: "storage"
