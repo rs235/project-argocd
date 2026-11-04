@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn-storageclass
+  namespace: argocd
+spec:
+  project: platform
+
+  source:
+    repoURL: https://github.com/rs235/project-argocd.git
+    targetRevision: main
+    path: applications/platform/longhorn
+
+  destination:
+    server: https://kubernetes.default.svc
+    # This resource is cluster scoped so it's namespace doesn't matter.
+    namespace: default
+
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: false

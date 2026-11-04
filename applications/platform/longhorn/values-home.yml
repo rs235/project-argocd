@@ -1,0 +1,11 @@
+---
+preUpgradeChecker:
+  jobEnabled: false
+
+persistence:
+  defaultClass: false
+
+defaultSettings:
+  defaultDataPath: /var/lib/longhorn
+  defaultReplicaCount: 3
+  createDefaultDiskLabeledNodes: true
