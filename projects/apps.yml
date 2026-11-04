@@ -10,7 +10,7 @@ spec:
   description: Application workloads
 
   sourceRepos:
-    - https://github.com/rs235/gitops.git
+    - https://github.com/rs235/project-argocd.git
 
   destinations:
     - server: https://kubernetes.default.svc
