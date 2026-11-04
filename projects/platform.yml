@@ -10,8 +10,9 @@ spec:
   description: Platform services
 
   sourceRepos:
-    - https://github.com/rs235/gitops.git
+    - https://github.com/rs235/project-argocd.git
     - https://prometheus-community.github.io/helm-charts
+    - https://charts.longhorn.io
 
   destinations:
     - server: https://kubernetes.default.svc
@@ -20,11 +21,13 @@ spec:
       namespace: monitoring
     - server: https://kubernetes.default.svc
       namespace: kube-system
+    - server: https://kubernetes.default.svc
+      namespace: longhorn-system
 
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
 
   namespaceResourceWhitelist:
-    - group: "*"  # Kubernetes API group. Not namespace.
+    - group: "*"
       kind: "*"

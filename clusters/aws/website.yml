@@ -9,7 +9,7 @@ spec:  # ArgoCD Application specification.
   project: apps  # ArgoCD project name for this app.
 
   source:  # Source of configuration.
-    repoURL: https://github.com/rs235/gitops.git  # Repo url.
+    repoURL: https://github.com/rs235/project-argocd.git  # Repo url.
     targetRevision: main  # Repo branch.
     path: applications/workloads/website  # Path in the repo containing app manifests.
 
