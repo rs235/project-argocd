@@ -8,7 +8,7 @@ grafana:
     storageClassName: longhorn
     accessModes:
       - ReadWriteOnce
-    size: 4Gi
+    size: 2Gi
 
   service:
     type: LoadBalancer
@@ -19,7 +19,7 @@ grafana:
 prometheus:
   prometheusSpec:
     retention: 15d
-    retentionSize: 12GB
+    retentionSize: 6GB
 
     storageSpec:
       volumeClaimTemplate:
@@ -29,7 +29,7 @@ prometheus:
             - ReadWriteOnce
           resources:
             requests:
-              storage: 16Gi
+              storage: 8Gi
 
     additionalScrapeConfigs:
       - job_name: pve
@@ -70,4 +70,4 @@ alertmanager:
             - ReadWriteOnce
           resources:
             requests:
-              storage: 2Gi
+              storage: 1Gi
