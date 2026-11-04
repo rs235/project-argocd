@@ -12,6 +12,9 @@ grafana:
 
   service:
     type: LoadBalancer
+    annotations:
+      metallb.io/address-pool: default
+    loadBalancerIP: 10.10.10.43
 
 prometheus:
   prometheusSpec:
@@ -48,6 +51,9 @@ prometheus:
 
   service:
     type: LoadBalancer
+    annotations:
+      metallb.io/address-pool: default
+    loadBalancerIP: 10.10.10.42
 
 alertmanager:
   enabled: true

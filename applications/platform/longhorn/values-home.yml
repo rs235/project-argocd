@@ -10,3 +10,10 @@ defaultSettings:
   defaultDataPath: /var/lib/longhorn
   defaultReplicaCount: 3
   createDefaultDiskLabeledNodes: true
+
+service:
+  ui:
+    type: LoadBalancer
+    annotations:
+      metallb.io/address-pool: default
+    loadBalancerIP: 10.10.10.41
