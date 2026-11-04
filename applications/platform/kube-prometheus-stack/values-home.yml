@@ -1,12 +1,32 @@
 ---
 grafana:
   enabled: true
+
+  persistence:
+    enabled: true
+    type: pvc
+    storageClassName: longhorn
+    accessModes:
+      - ReadWriteOnce
+    size: 4Gi
+
   service:
     type: LoadBalancer
 
 prometheus:
   prometheusSpec:
     retention: 15d
+    retentionSize: 12GB
+
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: longhorn
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 16Gi
 
     additionalScrapeConfigs:
       - job_name: pve
@@ -31,5 +51,17 @@ prometheus:
 
 alertmanager:
   enabled: true
+
   service:
-    type: LoadBalancer
+    type: ClusterIP
+  
+  alertmanagerSpec:
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: longhorn
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 2Gi
