@@ -3,9 +3,11 @@ preUpgradeChecker:
   jobEnabled: false
 
 persistence:
+  createStorageClass: false
   defaultClass: false
 
 defaultSettings:
   defaultDataPath: /var/lib/longhorn
   defaultReplicaCount: 3
   createDefaultDiskLabeledNodes: true
+
