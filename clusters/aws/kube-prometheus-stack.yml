@@ -16,7 +16,7 @@ spec:
         valueFiles:
           - $values/applications/platform/kube-prometheus-stack/values-aws.yml
 
-    - repoURL: https://github.com/rs235/gitops.git
+    - repoURL: https://github.com/rs235/project-argocd.git
       targetRevision: main
       ref: values
 
