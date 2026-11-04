@@ -11,7 +11,9 @@ spec:
     - repoURL: https://charts.longhorn.io
       chart: longhorn
       targetRevision: 1.13.0
-      valueFiles:
+      helm:
+        releaseName: longhorn
+        valueFiles:
           - $values/applications/platform/longhorn/values-home.yml
 
     - repoURL: https://github.com/rs235/project-argocd.git
