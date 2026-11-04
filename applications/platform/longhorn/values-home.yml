@@ -17,4 +17,3 @@ service:
     annotations:
       metallb.io/address-pool: default
     loadBalancerIP: 10.10.10.41
-    allocateLoadBalancerNodePorts: false
