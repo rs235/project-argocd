@@ -10,4 +10,3 @@ defaultSettings:
   defaultDataPath: /var/lib/longhorn
   defaultReplicaCount: 3
   createDefaultDiskLabeledNodes: true
-
