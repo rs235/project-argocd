@@ -54,7 +54,7 @@ alertmanager:
 
   service:
     type: ClusterIP
-  
+
   alertmanagerSpec:
     storage:
       volumeClaimTemplate:
