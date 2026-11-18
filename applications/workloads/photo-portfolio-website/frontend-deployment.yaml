@@ -35,7 +35,7 @@ spec:
 
       containers:
         - name: frontend
-          image: rs235/portfolio-website-frontend:1795020167
+          image: rs235/portfolio-website-frontend:1795023123
           imagePullPolicy: Always
 
           resources:
