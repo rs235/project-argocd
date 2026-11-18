@@ -10,6 +10,7 @@ metadata:
     io.kompose.service: backend
 
   name: backend
+  namespace: photo-portfolio-website
 
 spec:
   replicas: 1

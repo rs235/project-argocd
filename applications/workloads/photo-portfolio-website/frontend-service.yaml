@@ -5,13 +5,18 @@ metadata:
   annotations:
     kompose.cmd: ./kompose convert -f compose.yaml
     kompose.version: 1.38.0 (a8f5d1cbd)
+
   labels:
     io.kompose.service: frontend
+
   name: frontend
+  namespace: photo-portfolio-website
+
 spec:
   ports:
     - name: "8080"
       port: 8080
       targetPort: 8080
+
   selector:
     io.kompose.service: frontend
