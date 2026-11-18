@@ -71,4 +71,13 @@ spec:
             - containerPort: 8080
               protocol: TCP
 
+          volumeMounts:
+            - name: nginx-tmp
+              mountPath: /tmp
+
+
       restartPolicy: Always
+
+      volumes:
+       - name: nginx-tmp
+         emptyDir: {}
