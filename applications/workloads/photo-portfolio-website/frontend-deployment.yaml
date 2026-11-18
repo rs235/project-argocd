@@ -5,14 +5,19 @@ metadata:
   annotations:
     kompose.cmd: ./kompose convert -f compose.yaml
     kompose.version: 1.38.0 (a8f5d1cbd)
+
   labels:
     io.kompose.service: frontend
+
   name: frontend
+
 spec:
   replicas: 1
+
   selector:
     matchLabels:
       io.kompose.service: frontend
+
   template:
     metadata:
       annotations:
@@ -20,10 +25,46 @@ spec:
         kompose.version: 1.38.0 (a8f5d1cbd)
       labels:
         io.kompose.service: frontend
+
     spec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+
       containers:
-        - image: rs235/portfolio-website-frontend:latest
-          name: frontend
+        - name: frontend
+          image: rs235/portfolio-website-frontend:latest
+
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+
+          readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
+          livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20
+
           ports:
             - containerPort: 8080
               protocol: TCP

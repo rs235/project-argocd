@@ -5,16 +5,22 @@ metadata:
   annotations:
     kompose.cmd: ./kompose convert -f compose.yaml
     kompose.version: 1.38.0 (a8f5d1cbd)
+
   labels:
     io.kompose.service: backend
+
   name: backend
+
 spec:
   replicas: 1
+
   selector:
     matchLabels:
       io.kompose.service: backend
+
   strategy:
     type: Recreate
+
   template:
     metadata:
       annotations:
@@ -22,9 +28,19 @@ spec:
         kompose.version: 1.38.0 (a8f5d1cbd)
       labels:
         io.kompose.service: backend
+
     spec:
+      terminationGracePeriodSeconds: 30
+
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+
       containers:
-        - env:
+        - name: backend
+          image: rs235/portfolio-website-backend:latest
+          env:
             - name: CACHE_DIR
               value: /app/cache
             - name: NODE_ENV
@@ -33,39 +49,55 @@ spec:
               value: /app/photos
             - name: PORT
               value: "3000"
-          image: rs235/portfolio-website-backend:latest
+
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+
           livenessProbe:
             exec:
               command:
                 - node
                 - -e
                 - |
-                  fetch
+                  fetch('http://127.0.0.1:3000/api/health')
                     .then(r => process.exit(r.ok ? 0 : 1))
                     .catch(() => process.exit(1))
             failureThreshold: 5
             initialDelaySeconds: 120
             periodSeconds: 15
             timeoutSeconds: 5
+
           readinessProbe:
             exec:
               command:
                 - node
                 - -e
                 - |
-                  fetch(''http://127.0.0.1:3000/api/health'')
+                  fetch('http://127.0.0.1:3000/api/health')
                     .then(r => process.exit(r.ok ? 0 : 1))
                     .catch(() => process.exit(1))
+
             failureThreshold: 5
             initialDelaySeconds: 120
             periodSeconds: 15
             timeoutSeconds: 5
-          name: backend
+
           ports:
             - containerPort: 3000
               protocol: TCP
-          securityContext:
-            readOnlyRootFilesystem: true
+
           volumeMounts:
             - mountPath: /app/photos
               name: photos
@@ -74,7 +106,11 @@ spec:
               name: photo-cache
             - mountPath: /tmp
               name: backend-tmpfs0
+
       restartPolicy: Always
+      imagePullPolicy: Always
+
+
       volumes:
         - name: photos
           persistentVolumeClaim:
