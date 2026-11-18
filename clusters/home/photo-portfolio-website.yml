@@ -1,0 +1,25 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: photo-portfolio-website
+  namespace: argocd
+
+spec:
+  project: apps
+
+  source:
+    repoURL: https://github.com/rs235/project-argocd.git
+    targetRevision: main
+    path: applications/workloads/photo-portfolio-website
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: photo-portfolio-website
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
