@@ -40,6 +40,7 @@ spec:
       containers:
         - name: backend
           image: rs235/portfolio-website-backend:latest
+          imagePullPolicy: Always
           env:
             - name: CACHE_DIR
               value: /app/cache
@@ -108,7 +109,6 @@ spec:
               name: backend-tmpfs0
 
       restartPolicy: Always
-      imagePullPolicy: Always
 
       volumes:
         - name: photos
