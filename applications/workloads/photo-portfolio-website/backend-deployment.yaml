@@ -39,7 +39,7 @@ spec:
 
       containers:
         - name: backend
-          image: rs235/portfolio-website-backend:latest
+          image: rs235/portfolio-website-backend:1795015800
           imagePullPolicy: Always
           env:
             - name: CACHE_DIR
