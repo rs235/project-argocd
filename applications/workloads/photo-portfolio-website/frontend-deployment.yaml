@@ -10,6 +10,7 @@ metadata:
     io.kompose.service: frontend
 
   name: frontend
+  namespace: photo-portfolio-website
 
 spec:
   replicas: 1
