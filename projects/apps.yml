@@ -23,7 +23,9 @@ spec:
   clusterResourceWhitelist:
     - group: ""
       kind: Namespace
+    - group: ""
+      kind: PersistentVolume
 
   namespaceResourceWhitelist:
-    - group: "*"  # Kubernetes API group. Not namespace.
+    - group: "*"
       kind: "*"
