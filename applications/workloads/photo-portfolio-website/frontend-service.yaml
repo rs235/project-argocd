@@ -13,10 +13,14 @@ metadata:
   namespace: photo-portfolio-website
 
 spec:
+  selector:
+    io.kompose.service: frontend
+
+  type: LoadBalancer
+
+  externalTrafficPolicy: Local
+
   ports:
     - name: "8080"
       port: 8080
       targetPort: 8080
-
-  selector:
-    io.kompose.service: frontend
