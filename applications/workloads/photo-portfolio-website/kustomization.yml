@@ -4,7 +4,7 @@ kind: Kustomization
 
 resources:
   - backend-deployment.yaml
-  - backend-pv.yaml
+  - backend-photos-pv.yaml
   - backend-photos-pvc.yaml
   - backend-photos-cache-pvc.yaml
   - backend-service.yaml

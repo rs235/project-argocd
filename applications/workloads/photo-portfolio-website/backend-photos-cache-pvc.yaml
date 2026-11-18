@@ -4,10 +4,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: photo-cache
   namespace: photo-portfolio-website
-
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: longhorn
   resources:
     requests:
       storage: 1Gi
