@@ -79,6 +79,7 @@ jobs:
       - name: Render manifests
         run: |
           kubectl kustomize applications/workloads/website > rendered/kustomize/website.yml
+          kubectl kustomize applications/workloads/photo-portfolio-website > rendered/kustomize/photo-portfolio-website.yml
 
       - name: Upload rendered manifests
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
