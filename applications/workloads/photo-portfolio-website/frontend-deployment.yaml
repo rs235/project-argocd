@@ -75,9 +75,8 @@ spec:
             - name: nginx-tmp
               mountPath: /tmp
 
-
       restartPolicy: Always
 
       volumes:
-       - name: nginx-tmp
-         emptyDir: {}
+        - name: nginx-tmp
+          emptyDir: {}
