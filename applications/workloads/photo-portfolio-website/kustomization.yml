@@ -9,4 +9,5 @@ resources:
   - backend-photos-cache-pvc.yaml
   - backend-service.yaml
   - frontend-deployment.yaml
+  - frontend-policy.yaml
   - frontend-service.yaml
