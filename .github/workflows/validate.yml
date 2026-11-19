@@ -78,7 +78,6 @@ jobs:
 
       - name: Render manifests
         run: |
-          kubectl kustomize applications/workloads/website > rendered/kustomize/website.yml
           kubectl kustomize applications/workloads/photo-portfolio-website \
             > rendered/kustomize/photo-portfolio-website.yml
 
