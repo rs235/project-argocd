@@ -16,8 +16,6 @@ spec:
     - server: https://kubernetes.default.svc
       namespace: apps
     - server: https://kubernetes.default.svc
-      namespace: website
-    - server: https://kubernetes.default.svc
       namespace: photo-portfolio-website
 
   clusterResourceWhitelist:
